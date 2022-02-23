@@ -1,8 +1,8 @@
 steps:
 # Build Docker Image 
 - name: gcr.io/cloud-builders/docker
-  args: ['build', '-t', 'gcr.io/ca-k8s-340019/fontend', '.']
+  args: ['build', '-t', 'gcr.io/ca-k8s-340019/fontend:staging', '.']
 
 #Push Docker Image
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'gcr.io/ca-k8s-340019/fontend']
+  args: ['push', 'gcr.io/ca-k8s-340019/fontend:staging']
