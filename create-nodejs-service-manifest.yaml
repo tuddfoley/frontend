@@ -25,6 +25,7 @@ spec:
       containers:
       - name: node
         image: gcr.io/ca-k8s-340019/fontend:staging
+        imagePullPolicy: Always
         # container opens port 22137
         ports:
         - containerPort: 22137
