@@ -20,7 +20,7 @@ metadata:
     app: node
 spec:
   replicas: 1
-  stragtegy:
+  strategy:
     type: RollingUpdate
     rollingUpdate:
       maxSurge: 25%
