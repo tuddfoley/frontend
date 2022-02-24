@@ -20,6 +20,11 @@ metadata:
     app: node
 spec:
   replicas: 1
+  stragtegy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
   selector:
     matchLabels:
       app: node    
