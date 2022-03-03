@@ -1,33 +1,36 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  # deployment name
   name: node-deployment-dev
   labels:
     app: node
 spec:
+  replicas: 1
   strategy:
     type: RollingUpdate
     rollingUpdate:
       maxSurge: 25%
       maxUnavailable: 25%
-  replicas: 1
   selector:
     matchLabels:
       app: node    
-  # pod template
   template:
     metadata:
       labels:
         app: node
     spec:
-      # pod contains 1 container
       containers:
       - name: node
-        image: gcr.io/ca-k8s-340019/fontend:staging
+        image: gcr.io/ca-k8s-340019/frontend:latest
         imagePullPolicy: Always
-        # container opens port 22137
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
         ports:
         - containerPort: 22137
           name: http
-          protocol: TCP            
+          protocol: TCP      
