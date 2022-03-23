@@ -23,6 +23,6 @@ spec:
           image: gcr.io/ca-k8s-340019/frontend:staging
           imagePullPolicy: Always
           ports:
-            - containerPort: 22137
-              name: http
-              protocol: TCP
+          - containerPort: 22137
+             name: http
+             protocol: TCP
