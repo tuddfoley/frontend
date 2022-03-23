@@ -10,3 +10,4 @@
 4. To run code locally type: node fe-server.js
  - Can access code on http://localhost:22137
  - 22137 can be changed in /config/config.json property "exposedPort"
+ Kickoff Build
