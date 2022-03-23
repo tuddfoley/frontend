@@ -6,3 +6,17 @@ steps:
 #Push Docker Image
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'gcr.io/ca-k8s-340019/frontend:latest']
+  
+- name: "gcr.io/cloud-builders/gke-deploy"
+  args:
+  - run
+  - --filename=create-nodejs-service-manifest.yaml
+  - --location=europe-west2
+  - --cluster=k8s-ca-cluster
+
+- name: "gcr.io/cloud-builders/gke-deploy"
+  args:
+  - run
+  - --filename=canary.yaml
+  - --location=europe-west2
+  - --cluster=k8s-ca-cluster
