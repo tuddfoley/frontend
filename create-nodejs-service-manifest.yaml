@@ -20,7 +20,7 @@ spec:
       serviceAccountName: frontend-details
       containers:
         - name: reviews
-          image: gcr.io/ca-k8s-340019/frontend:stagging
+          image: gcr.io/ca-k8s-340019/frontend:staging
           imagePullPolicy: Always
           ports:
             - containerPort: 22137
