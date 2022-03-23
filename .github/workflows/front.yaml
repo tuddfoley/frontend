@@ -28,14 +28,12 @@ jobs:
         
     - name: Build Docker Image
       run: docker build -t $IMAGE_NAME:staging .
-      working-directory: front
-
+  
     - name: Configure Docker Client
       run: |-
         gcloud auth configure-docker --quiet
     
     - name: Push Docker Image to Container Registry (GCR)
-      working-directory: front
       run: |-
         docker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:staging
         docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:staging
