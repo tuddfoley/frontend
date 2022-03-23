@@ -1,0 +1,47 @@
+name: Docker
+on:
+  push:
+    branches: [ dev ]
+  pull_request:
+    branches: [ dev ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      IMAGE_NAME: frontend
+      PROJECT_ID: ca-k8s-340019
+      GKE_CLUSTER: k8s-ca-cluster 
+      GKE_ZONE: europe-west2
+      
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    
+    - uses: google-github-actions/setup-gcloud@v0
+      with:
+        service_account_key: ${{ secrets.GCP_CREDENTIALS  }}
+        project_id: ${{ env.PROJECT_ID }}
+        export_default_credentials: true
+    - run: |-
+        gcloud container clusters get-credentials "$GKE_CLUSTER" --region "$GKE_ZONE"
+        
+    - name: Build Docker Image
+      run: docker build -t $IMAGE_NAME:staging .
+      working-directory: front
+
+    - name: Configure Docker Client
+      run: |-
+        gcloud auth configure-docker --quiet
+    
+    - name: Push Docker Image to Container Registry (GCR)
+      working-directory: front
+      run: |-
+        docker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:staging
+        docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:staging
+    
+    - name: Deploy Frontend
+      run: |
+        kubectl apply -f create-nodejs-service-manifest.yaml
+        kubectl apply -f canary.yaml
+        kubectl apply -f routing.yaml
