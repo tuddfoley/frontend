@@ -11,13 +11,5 @@ steps:
   args:
   - run
   - --filename=create-nodejs-service-manifest.yaml
-  - --location=us-central1-c
-  - --cluster=cluster-1
-
-
-- name: "gcr.io/cloud-builders/gke-deploy"
-  args:
-  - run
-  - --filename=canary.yaml
-  - --location=us-central1-c
-  - --cluster=cluster-1
+  - --location=europe-west2
+  - --cluster=k8s-ca-cluster
