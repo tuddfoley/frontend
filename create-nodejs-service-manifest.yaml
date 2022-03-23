@@ -1,23 +1,10 @@
-apiVersion: v1
-kind: Service
-metadata:
-  name: node-service
-spec:
-  type: LoadBalancer
-  ports:
-    - name: http
-      port: 80
-      targetPort: 22137
-  selector:
-    app: node
-
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: node-deployment
   labels:
     app: node
+    version: v1
 spec:
   replicas: 1
   strategy:
@@ -40,8 +27,7 @@ spec:
         ports:
         - containerPort: 22137
           name: http
-          protocol: TCP      
-
+          protocol: TCP
 ---
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
