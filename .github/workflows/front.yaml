@@ -35,7 +35,7 @@ jobs:
     
     - name: Push Docker Image to Container Registry (GCR)
       run: |-
-        docker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:staging
+        docker tag $IMAGE_NAME:staging gcr.io/$PROJECT_ID/$IMAGE_NAME:staging
         docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:staging
     
     - name: Deploy Frontend
