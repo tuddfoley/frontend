@@ -1,9 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: node-deployment-dev
+  name: node-deployment-v2
   labels:
     app: node
+    version: v2
 spec:
   replicas: 1
   strategy:
