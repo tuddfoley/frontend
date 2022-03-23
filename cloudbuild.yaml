@@ -1,11 +1,11 @@
 steps:
 # Build Docker Image 
 - name: gcr.io/cloud-builders/docker
-  args: ['build', '-t', 'gcr.io/ca-k8s-340019/fontend:staging', '.']
+  args: ['build', '-t', 'gcr.io/ca-k8s-340019/frontend:staging', '.']
 
 #Push Docker Image
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'gcr.io/ca-k8s-340019/fontend:staging']
+  args: ['push', 'gcr.io/ca-k8s-340019/frontend:staging']
 
 - name: "gcr.io/cloud-builders/gke-deploy"
   args:
